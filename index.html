@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>갑상선수질암(MTC) 관리 가이드라인 (ATA 2015)</title>
+<style>
+  :root {
+    --bg: #f6f8fa;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #0550ae;
+    --green: #1a7f37;
+    --yellow: #9a6700;
+    --red: #cf222e;
+    --orange: #bc4c00;
+    --text: #1f2328;
+    --text2: #57606a;
+    --rec-a: #116329;
+    --rec-b: #0550ae;
+    --rec-c: #57606a;
+    --rec-e: #bc4c00;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner { width: 100%; max-width: 960px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .logo-badge {
+    background: #0f766e;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+  header h1 { font-size: 20px; font-weight: 700; color: var(--text); }
+  .meta { color: var(--text2); font-size: 11px; }
+  .source-link { color: var(--accent2); font-size: 11px; text-decoration: none; }
+  .source-link:hover { text-decoration: underline; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex;
+    justify-content: center;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+  .tab {
+    padding: 8px 14px;
+    font-size: 12px;
+    color: var(--text2);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active { color: #0f766e; border-bottom-color: #0f766e; }
+  .tab-abbr-wrap {
+    display: flex;
+    align-items: center;
+    padding: 4px 6px;
+    margin-left: 6px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 12px 16px; max-width: 960px; margin: 0 auto; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* ── GRID ── */
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  @media (max-width: 700px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+  /* ── CARD ── */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 10px; }
+  .card-header {
+    background: var(--surface2);
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
+  .card-header .toggle { font-size: 14px; transition: transform .2s; }
+  .card-header.open .toggle { transform: rotate(180deg); }
+  .card-body { padding: 10px 12px; }
+  .card-body.collapsed { display: none; }
+
+  /* ── STAT ── */
+  .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 100px; }
+  .stat-val { font-size: 20px; font-weight: 700; color: #0f766e; }
+  .stat-lbl { font-size: 10px; color: var(--text2); margin-top: 2px; }
+
+  /* ── GRADE BADGES ── */
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade-a { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
+  .grade-b { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
+  .grade-c { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
+  .grade-d { background: #ffebe9; color: #82071e; border: 1px solid #cf222e; }
+  .grade-e { background: #fff8c5; color: #7d4e00; border: 1px solid #9a6700; }
+  .grade-i { background: #f5f0ff; color: #5b21b6; border: 1px solid #7c3aed; }
+
+  /* ── TOOLTIP ── */
+  .grade::after {
+    content: attr(data-tip);
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1f2328;
+    color: #e6edf3;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 500;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+  }
+  .grade::before {
+    content: '';
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1f2328;
+    z-index: 501;
+    pointer-events: none;
+  }
+  .grade:hover::after, .grade:hover::before { display: block; }
+
+  /* ── REC LIST ── */
+  .rec-list { list-style: none; }
+  .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
+  .rec-num { font-size: 10px; color: var(--text2); font-weight: 700; min-width: 22px; margin-top: 2px; flex-shrink: 0; }
+  .rec-text { font-size: 12px; color: var(--text); line-height: 1.55; }
+  .rec-text strong { color: #0f766e; }
+
+  /* ── ALERT ── */
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: 12px; margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
+  .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
+  .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
+  .alert-success { background: #dafbe1; border-left: 3px solid var(--green); color: #116329; }
+  .alert-teal { background: #f0fdfa; border-left: 3px solid #0f766e; color: #134e4a; }
+
+  /* ── TABLE ── */
+  .mtc-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .mtc-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; border-bottom: 1px solid var(--border); }
+  .mtc-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .mtc-table tr:last-child td { border-bottom: none; }
+  .mtc-table tr:hover td { background: rgba(0,0,0,0.02); }
+  .mtc-table .section-row td { background: var(--surface2); color: #0f766e; font-weight: 600; font-size: 11px; }
+
+  /* ── ACCORDION ── */
+  .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: 12px; font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr:hover { background: var(--border); }
+  .osa-hdr span { font-size: 11px; color: var(--text2); }
+  .osa-body { display: none; padding: 10px 12px; font-size: 12px; }
+
+  /* ── PILL ── */
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+  .pill-hst { background: #ffebe9; color: #82071e; }
+  .pill-h   { background: #fff8c5; color: #7d4e00; }
+  .pill-mod { background: #dafbe1; color: #116329; }
+  .pill-gene { background: #ddf4ff; color: var(--accent2); }
+
+  /* ── ABBR ── */
+  .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
+  .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .abbr-term { font-weight: 700; color: #0f766e; font-size: 12px; font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: 11px; color: var(--text2); line-height: 1.45; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
+
+  small { color: var(--text2); font-size: 10px; }
+  .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
+
+  /* Risk badges */
+  .risk-hst { background: #ffebe9; color: #82071e; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
+  .risk-h   { background: #fff8c5; color: #7d4e00; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
+  .risk-mod { background: #dafbe1; color: #116329; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
+
+  .flow-step {
+    display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px;
+    border-radius: 6px; margin-bottom: 4px;
+  }
+  .flow-num { font-weight: 700; min-width: 24px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div style="display:flex;align-items:center;gap:10px;justify-content:center">
+      <span class="logo-badge">ATA 2015 개정판</span>
+      <h1>갑상선수질암(MTC) 관리 가이드라인</h1>
+    </div>
+    <div style="text-align:center;margin-top:3px;line-height:1.4">
+      <a href="https://doi.org/10.1089/thy.2014.0335" class="source-link" target="_blank">Thyroid 2015;25:567–610 ↗</a>
+      <span class="meta"> · American Thyroid Association Guidelines Task Force on MTC</span><br>
+      <span style="font-size:10px;color:var(--text2);font-style:italic">This tool is not officially endorsed by ATA</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <div class="tab-bar-inner">
+    <div class="tab active" onclick="showTab('overview',this)">🏠 개요</div>
+    <div class="tab" onclick="showTab('genetics',this)">🧬 유전·분류</div>
+    <div class="tab" onclick="showTab('diagnosis',this)">🔬 진단</div>
+    <div class="tab" onclick="showTab('surgery',this)">🔪 수술</div>
+    <div class="tab" onclick="showTab('followup',this)">📊 추적관찰</div>
+    <div class="tab" onclick="showTab('systemic',this)">💊 전신치료</div>
+    <div class="tab" onclick="showTab('recs',this)">📋 권고 전체</div>
+    <div class="tab-abbr-wrap">
+      <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
+        <span style="position:absolute;left:8px;color:var(--text2);font-size:12px;pointer-events:none">🔍</span>
+        <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size:12px;width:130px;outline:none;box-sizing:border-box;"
+          onfocus="this.style.borderColor='#0f766e'" onblur="this.style.borderColor='var(--border)'">
+        <span id="abbr-count" style="position:absolute;right:7px;font-size:10px;color:var(--text2);pointer-events:none"></span>
+      </div>
+      <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
+        <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="tab-overview" class="panel active">
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-val">1–2%</div><div class="stat-lbl">전체 갑상선암 중 MTC 비율 (SEER)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--red)">~25%</div><div class="stat-lbl">유전성 MTC 비율 (MEN2A/2B/FMTC)</div></div>
+    <div class="stat-box"><div class="stat-val" style="color:var(--yellow)">~50%</div><div class="stat-lbl">산발성 MTC의 체세포 RET 돌연변이</div></div>
+    <div class="stat-box"><div class="stat-val">67개</div><div class="stat-lbl">근거 기반 권고 사항</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔑</span> MTC 핵심 특성</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal" style="margin-bottom:8px">
+        <span>📌</span>
+        <div><strong>갑상선수질암(MTC)</strong>은 신경능선 유래 <strong>방여포 C세포</strong>에서 발생하는 신경내분비종양. 칼시토닌(Calcitonin)과 CEA를 분비하며, RET 원발암유전자 돌연변이가 핵심 병인.</div>
+      </div>
+      <div class="grid2" style="gap:8px">
+        <div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td style="font-weight:600">세포 기원</td><td>방여포 C세포 (신경능선 유래)</td></tr>
+            <tr><td style="font-weight:600">주요 종양 표지자</td><td>칼시토닌(Calcitonin), CEA</td></tr>
+            <tr><td style="font-weight:600">유전성 비율</td><td>~25% (MEN2A 95%, MEN2B 5%)</td></tr>
+            <tr><td style="font-weight:600">산발성 RET 돌연변이</td><td>약 50% (체세포)</td></tr>
+            <tr><td style="font-weight:600">RAS 돌연변이</td><td>RET 음성 산발성의 18–80%</td></tr>
+            <tr><td style="font-weight:600">10년 생존율 (병기별)</td><td>I: 100%, II: 93%, III: 71%, IV: 21%</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-danger">
+            <span>⚠️</span>
+            <div>촉지 가능한 갑상선 결절 MTC 환자의 <strong>70%</strong>에서 경부 림프절 전이, <strong>10%</strong>에서 원격 전이 존재. 조기 진단·수술이 예후를 결정.</div>
+          </div>
+          <div class="alert alert-warn">
+            <span>🧬</span>
+            <div>MEN2B 및 RET M918T 돌연변이(ATA-HST): 생후 1년 이내에도 MTC 발생 가능. <strong>가장 공격적인 표현형</strong>이므로 신생아기 갑상선 절제술 권고.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATA 위험도 분류 카드 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🎯</span> ATA 위험도 분류 (2015 개정)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal" style="margin-bottom:8px">
+        <span>ℹ️</span>
+        <div>이전 A/B/C/D 분류 → <strong>MOD / H / HST</strong> 3단계로 개정 (권고 1). 돌연변이별 MTC 공격성에 근거.</div>
+      </div>
+      <table class="mtc-table">
+        <tr>
+          <th>ATA 위험도</th>
+          <th>해당 RET 돌연변이 (주요)</th>
+          <th>MTC 공격성</th>
+          <th>PHEO 빈도</th>
+          <th>HPTH 빈도</th>
+          <th>예방적 수술 시기</th>
+        </tr>
+        <tr>
+          <td><span class="risk-hst">HST (최고위험)</span></td>
+          <td>M918T (exon 16) — MEN2B</td>
+          <td>생후 수개월 내 발생·전이</td>
+          <td>~50%</td>
+          <td>없음</td>
+          <td><strong>생후 1년 이내</strong></td>
+        </tr>
+        <tr>
+          <td><span class="risk-h">H (고위험)</span></td>
+          <td>C634F/G/R/S/W/Y (exon 11), A883F (exon 15)</td>
+          <td>소아기 초 발생·전이 가능</td>
+          <td>~50% (C634)</td>
+          <td>~30% (C634)</td>
+          <td><strong>5세 이하 (Calcitonin 기준)</strong></td>
+        </tr>
+        <tr>
+          <td><span class="risk-mod">MOD (중등위험)</span></td>
+          <td>M918T, C634, A883F 이외 모든 돌연변이</td>
+          <td>성인기 발생, 경과 다양</td>
+          <td>+~10%</td>
+          <td>2–12%</td>
+          <td><strong>혈청 Calcitonin 상승 시</strong> (5세 시작)</td>
+        </tr>
+      </table>
+      <div style="margin-top:8px;font-size:11px;color:var(--text2)">* PHEO/HPTH 빈도: + ≈10%, ++ ≈20–30%, +++ ≈50%. CLA = 피부 지의 아밀로이드증 (C634 돌연변이와 관련). HD = 허쉬스프룽병 (exon 10 돌연변이와 관련)</div>
+    </div>
+  </div>
+
+  <!-- 진단 알고리즘 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🗺️</span> MTC 진단 및 관리 알고리즘 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">① 갑상선 결절 → MTC 의심·확진 시</div>
+          <div class="flow-step" style="background:#f0fdfa;border-left:3px solid #0f766e">
+            <span class="flow-num" style="color:#0f766e">1</span>
+            <div>경부 초음파 + 혈청 Calcitonin·CEA 측정 + RET 생식세포 돌연변이 검사</div>
+          </div>
+          <div class="flow-step" style="background:#ddf4ff;border-left:3px solid var(--accent2)">
+            <span class="flow-num" style="color:var(--accent2)">2</span>
+            <div>RET(+) → PHEO/HPTH 배제 (수술 전 필수)</div>
+          </div>
+          <div class="flow-step" style="background:#dafbe1;border-left:3px solid var(--green)">
+            <span class="flow-num" style="color:var(--green)">3</span>
+            <div>Calcitonin &lt;500 pg/mL → 원격전이 영상 생략 가능</div>
+          </div>
+          <div class="flow-step" style="background:#fff8c5;border-left:3px solid var(--yellow)">
+            <span class="flow-num" style="color:var(--yellow)">4</span>
+            <div>Calcitonin ≥500 pg/mL → CT·MRI·골스캔 등 전이 영상 시행</div>
+          </div>
+          <div class="flow-step" style="background:#ffebe9;border-left:3px solid var(--red)">
+            <span class="flow-num" style="color:var(--red)">5</span>
+            <div>PHEO 존재 시 <strong>부신절제술 먼저</strong> → 이후 갑상선 수술</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">② RET 생식세포 돌연변이 확인 시 (예방적 수술)</div>
+          <div class="flow-step" style="background:#ffebe9;border-left:3px solid var(--red)">
+            <span class="flow-num" style="color:var(--red)">HST</span>
+            <div>MEN2B (M918T): 생후 1년 이내 갑상선 절제술 ± level VI 림프절 청소술</div>
+          </div>
+          <div class="flow-step" style="background:#fff8c5;border-left:3px solid var(--yellow)">
+            <span class="flow-num" style="color:var(--yellow)">H</span>
+            <div>MEN2A C634: 5세 이하, Calcitonin 상승 시 즉시 수술. Calcitonin >40 pg/mL → level VI 포함</div>
+          </div>
+          <div class="flow-step" style="background:#dafbe1;border-left:3px solid var(--green)">
+            <span class="flow-num" style="color:var(--green)">MOD</span>
+            <div>5세부터 추적; Calcitonin 상승 확인 시 수술. 정상 Calcitonin → 연 1회 추적 (수년~수십 년)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEN2 증후군 구성 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧩</span> MEN2 증후군 구성 (권고 2)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">MEN2A (전체의 95%) — 4가지 변형</div>
+          <ul style="list-style:none;padding:0;font-size:12px;line-height:2">
+            <li>• <strong>고전적 MEN2A</strong>: MTC + PHEO ± HPTH. RET exon 10/11 돌연변이(95%)</li>
+            <li>• <strong>MEN2A + CLA</strong>: 등 피부 지의 아밀로이드증. RET C634 돌연변이</li>
+            <li>• <strong>MEN2A + HD</strong>: 허쉬스프룽병. RET exon 10 돌연변이 (gain/loss 기능 공존)</li>
+            <li>• <strong>FMTC 변형</strong>: MTC만 있고 PHEO·HPTH 없음 (단독 증후군 아님)</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:6px">MEN2B (전체의 5%) — 가장 공격적</div>
+          <ul style="list-style:none;padding:0;font-size:12px;line-height:2">
+            <li>• MTC + PHEO (~50%) + 특징적 표현형</li>
+            <li>• Marfanoid 체형, 구강·안구·소화관 신경절신경종증</li>
+            <li>• RET M918T (95%) 또는 A883F (5%)</li>
+            <li>• 75% 드노보 돌연변이 (주로 부계 유래)</li>
+          </ul>
+          <div class="alert alert-danger" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>MEN2B는 표현형으로 <strong>갑상선 결절 이전</strong>에 진단 가능 (구강 신경절신경종, 안검 외반 등). 조기 인식이 치료의 핵심.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-overview -->
+
+<!-- ═══════════════ GENETICS ═══════════════ -->
+<div id="tab-genetics" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧬</span> RET 원발암유전자와 MTC 병인</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>RET(REarranged during Transfection)는 염색체 10q11.2에 위치한 단일 경막 수용체 티로신 키나아제. 신경능선·새궁·비뇨생식기 유래 세포에서 발현. 100개 이상의 변이가 MTC와 관련.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">유전성 MTC: 생식세포 돌연변이</div>
+          <table class="mtc-table">
+            <tr><th>증후군</th><th>RET 돌연변이</th><th>비율</th></tr>
+            <tr><td>MEN2A (고전)</td><td>C634 (exon 11), C609/611/618/620 (exon 10)</td><td>~95%</td></tr>
+            <tr><td>MEN2B</td><td>M918T (exon 16), A883F (exon 15)</td><td>~95%/5%</td></tr>
+            <tr><td>FMTC 변형</td><td>Exon 10/11 + exon 13/14/15 다양</td><td>다양</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">산발성 MTC: 체세포 돌연변이</div>
+          <table class="mtc-table">
+            <tr><th>변이</th><th>빈도</th><th>의의</th></tr>
+            <tr><td>RET M918T</td><td>종양 크기↑와 상관</td><td>불량한 예후 예측</td></tr>
+            <tr><td>HRAS/KRAS/NRAS</td><td>RET 음성의 18–80%</td><td>RET 대안 경로</td></tr>
+            <tr><td>추가 유전변이</td><td>엑솜 분석 시 없음</td><td>RET·RAS가 상호 배타적 주요 변이</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RET 돌연변이 상세 표 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> RET 돌연변이별 표현형 및 ATA 위험도 (Table 4)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div style="overflow-x:auto">
+      <table class="mtc-table">
+        <tr>
+          <th>RET 돌연변이</th>
+          <th>Exon</th>
+          <th>ATA 위험도</th>
+          <th>PHEO 빈도</th>
+          <th>HPTH 빈도</th>
+          <th>CLA</th>
+          <th>HD</th>
+        </tr>
+        <tr><td>G533C</td><td>8</td><td><span class="risk-mod">MOD</span></td><td>+</td><td>-</td><td>N</td><td>N</td></tr>
+        <tr><td>C609F/G/R/S/Y</td><td>10</td><td><span class="risk-mod">MOD</span></td><td>+/++</td><td>+</td><td>N</td><td>Y</td></tr>
+        <tr><td>C611F/G/S/Y/W</td><td>10</td><td><span class="risk-mod">MOD</span></td><td>+/++</td><td>+</td><td>N</td><td>Y</td></tr>
+        <tr><td>C618F/R/S</td><td>10</td><td><span class="risk-mod">MOD</span></td><td>+/++</td><td>+</td><td>N</td><td>Y</td></tr>
+        <tr><td>C620F/R/S</td><td>10</td><td><span class="risk-mod">MOD</span></td><td>+/++</td><td>+</td><td>N</td><td>Y</td></tr>
+        <tr><td>C630R/Y</td><td>11</td><td><span class="risk-mod">MOD</span></td><td>+/++</td><td>+</td><td>N</td><td>N</td></tr>
+        <tr><td>D631Y</td><td>11</td><td><span class="risk-mod">MOD</span></td><td>+++</td><td>-</td><td>N</td><td>N</td></tr>
+        <tr style="background:#fffbeb"><td><strong>C634F/G/R/S/W/Y</strong></td><td>11</td><td><span class="risk-h">H</span></td><td><strong>+++</strong></td><td><strong>++</strong></td><td><strong>Y</strong></td><td>N</td></tr>
+        <tr><td>K666E</td><td>11</td><td><span class="risk-mod">MOD</span></td><td>+</td><td>-</td><td>N</td><td>N</td></tr>
+        <tr><td>E768D</td><td>13</td><td><span class="risk-mod">MOD</span></td><td>-</td><td>-</td><td>N</td><td>N</td></tr>
+        <tr><td>L790F</td><td>13</td><td><span class="risk-mod">MOD</span></td><td>+</td><td>-</td><td>N</td><td>N</td></tr>
+        <tr><td>V804L</td><td>14</td><td><span class="risk-mod">MOD</span></td><td>+</td><td>+</td><td>N</td><td>N</td></tr>
+        <tr><td>V804M</td><td>14</td><td><span class="risk-mod">MOD</span></td><td>+</td><td>+</td><td>Y</td><td>N</td></tr>
+        <tr style="background:#fffbeb"><td><strong>A883F</strong></td><td>15</td><td><span class="risk-h">H</span></td><td><strong>+++</strong></td><td>-</td><td>N</td><td>N</td></tr>
+        <tr><td>S891A</td><td>15</td><td><span class="risk-mod">MOD</span></td><td>+</td><td>+</td><td>N</td><td>N</td></tr>
+        <tr><td>R912P</td><td>16</td><td><span class="risk-mod">MOD</span></td><td>-</td><td>-</td><td>N</td><td>N</td></tr>
+        <tr style="background:#fff0f0"><td><strong>M918T</strong></td><td>16</td><td><span class="risk-hst">HST</span></td><td><strong>+++</strong></td><td>-</td><td>N</td><td>N</td></tr>
+      </table>
+      </div>
+      <div style="font-size:10px;color:var(--text2);margin-top:6px">+ ≈10%, ++ ≈20–30%, +++ ≈50% | CLA: 피부 지의 아밀로이드증 | HD: 허쉬스프룽병 | Y=발생, N=미발생</div>
+    </div>
+  </div>
+
+  <!-- 유전자 검사 권고 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> RET 유전자 검사 권고 (권고 3–9)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R3</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 공정한 근거">B</span></div>
+          <div class="rec-text">MEN2A 초기 검사: exon 10 (codons 609, 611, 618, 620), exon 11 (630, 634), exon 8, 13, 14, 15, 16에 대한 단일 또는 다단계 분석 권고.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R4</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 공정한 근거">B</span></div>
+          <div class="rec-text">RET 돌연변이가 미검출되거나 표현형-유전형 불일치 시 전체 코딩 영역 염기서열 분석.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R5</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 공정한 근거">B</span></div>
+          <div class="rec-text">MEN2B 의심 시: exon 16 (M918T) 검사 → 음성이면 exon 15 (A883F) → 음성이면 전체 코딩 영역 염기서열 분석.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R6</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 공정한 근거">B</span></div>
+          <div class="rec-text"><strong>모든 산발성 MTC 환자에서</strong> RET 생식세포 돌연변이 유전자 검사 시행. 돌연변이 발견 시 유전 상담 및 1차 가족 검사.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R7</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 공정한 근거">B</span></div>
+          <div class="rec-text">유전 상담·유전 검사 대상: ① 유전성 MTC 환자의 1차 가족 ② MEN2B 표현형을 가진 영아/소아의 부모 ③ CLA 환자 ④ exon 10 RET 돌연변이를 가진 HD 환자·성인 MEN2A 환자.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R8</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C: 전문가 의견">C</span></div>
+          <div class="rec-text">산발성 MTC의 종양 조직에서 체세포 RAS 또는 RET M918T 돌연변이 검사는 학문적·의사 개인 선호에 따라 시행하되 표준 관행은 아님.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R9</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C: 전문가 의견">C</span></div>
+          <div class="rec-text">드문 가족에서 전체 RET 코딩 영역 염기서열 분석 음성 시에도 MEN2A/2B 임상 기준 충족하면 1–3년 간격으로 MTC·PHEO·HPTH 정기 스크리닝 유지.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 윤리적 고려 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>⚖️</span> 유전 스크리닝 윤리 (권고 10–12)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R10</span>
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A: 강력한 권고">A</span></div>
+          <div class="rec-text">유전성 MTC의 경우, 가족에 대한 위험 경고 의무가 치료 표준. 유전 상담 환경에서 시행하며, 환자가 가족 통보를 거부할 경우 의사는 윤리 의무를 판단해야 함.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R11</span>
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A: 강력한 권고">A</span></div>
+          <div class="rec-text">동의 능력 미달 소아에서 부모가 RET 돌연변이 위험 공개를 거부할 경우, 아동 보호를 위해 국가 개입이 필요할 수 있음.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R12</span>
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A: 강력한 권고">A</span></div>
+          <div class="rec-text">생식 연령의 모든 RET 돌연변이 보유자에게 착상전 유전자 진단(PGD) 및 산전 검사 선택지 안내. MEN2B는 특히 중요.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-genetics -->
+
+<!-- ═══════════════ DIAGNOSIS ═══════════════ -->
+<div id="tab-diagnosis" class="panel">
+
+  <!-- 칼시토닌 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧪</span> 칼시토닌(Calcitonin) — MTC의 핵심 종양 표지자 (권고 13–14)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="alert alert-teal">
+            <span>📌</span>
+            <div>Calcitonin은 32개 아미노산 단량체 펩타이드. ICMA(면역화학발광측정법) 사용 시 프로칼시토닌 교차반응 최소화. 패혈증, 신부전, HPTH, 갑상선염, 소세포폐암 등에서 위양성 가능.</div>
+          </div>
+          <table class="mtc-table" style="margin-top:8px">
+            <tr><th>기준</th><th>내용</th></tr>
+            <tr><td>정상 상한</td><td>여성 5.2 ng/L, 남성 11.7 ng/L (assay별 상이)</td></tr>
+            <tr><td>소아 참고치</td><td>&lt;6개월: &lt;40 pg/mL | 6개월–3세: &lt;15 pg/mL</td></tr>
+            <tr><td>남녀 차이</td><td>남성이 높음 (더 큰 C세포 종괴 때문)</td></tr>
+            <tr><td>Hook effect</td><td>매우 높은 Calcitonin 시 위양성 낮게 측정 가능</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Calcitonin 수치와 수술 범위 (Machens 2010)</div>
+          <table class="mtc-table">
+            <tr><th>수술 전 Calcitonin</th><th>예측 전이 부위</th></tr>
+            <tr><td>&lt;20 pg/mL</td><td>림프절 전이 없음</td></tr>
+            <tr><td>20 pg/mL 초과</td><td>동측 중앙 및 측경부</td></tr>
+            <tr><td>50 pg/mL 초과</td><td>대측 중앙 경부</td></tr>
+            <tr><td>200 pg/mL 초과</td><td>대측 측경부</td></tr>
+            <tr><td>500 pg/mL 초과</td><td>상종격동</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>결절성 갑상선 질환에서 Calcitonin 스크리닝: 유럽 일부 국가 표준 관행 vs. 미국 비용-효과 논란. 권고 20은 Grade I (근거 불충분, 임상의 판단에 맡김).</div>
+          </div>
+        </div>
+      </div>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R13</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C: 전문가 의견">C</span></div>
+          <div class="rec-text">MTC 이외 다양한 질환(만성 신부전, HPTH, 자가면역 갑상선염, 소세포폐암, 전립선암, 비만세포증 등)에서 Calcitonin 위상승 가능성 인지 필요.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R14</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 공정한 근거">B</span></div>
+          <div class="rec-text">3세 미만 소아에서 Calcitonin이 현저히 상승(특히 6개월 미만)하며, 남성에서 높다는 점을 Calcitonin 해석 시 반드시 고려.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CEA -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> CEA — 종양 진행의 보조 지표 (권고 15)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>CEA는 초기 진단보다 <strong>병기 진행 모니터링</strong>에 유용. Calcitonin↑ + CEA↑ 불균형(CEA가 상대적으로 더 높음) → 탈분화(poorly differentiated) MTC 시사, 예후 불량.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R15</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B: 공정한 근거">B</span></div>
+          <div class="rec-text">Calcitonin·CEA는 반드시 동시에 측정. 진행성 MTC에서 CEA가 Calcitonin보다 현저히 높거나 두 표지자 모두 정상/저하 → 탈분화된 MTC 가능성 고려.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 병리 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔬</span> 병리 검사 (권고 16–18)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">MTC 조직학적 특징</div>
+          <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9">
+            <li>• 원형, 다각형, 방추형 세포; 혈관 간질 내 소포/시트 구조</li>
+            <li>• 아밀로이드 침착 (>50%에서): 전장 Calcitonin으로 구성</li>
+            <li>• 면역조직화학: Calcitonin, CEA, chromogranin A 양성; thyroglobulin 음성</li>
+            <li>• NKX2.1(TTF1), CK7, CK18 양성</li>
+            <li>• C세포 과형성(CCH): 7개 초과/군집, 기저막 침범 확인</li>
+          </ul>
+        </div>
+        <div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>유전성 MTC는 다초점·양측성, 산발성은 단일·단측성 경향. 동시 MTC+PTC 발생: 독일 3.6%, 이탈리아 13.8%, 한국 19% — 이유 불명.</div>
+          </div>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>CCH는 전암 병변이지만, 갑상선기능항진증·HPTH·신부전·노화에 의한 이차 CCH는 전암 병변 아님.</div>
+          </div>
+        </div>
+      </div>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R16</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">MTC 의심 종양의 모든 평가에서 Calcitonin, chromogranin, CEA 양성 및 thyroglobulin 음성 확인을 위한 면역조직화학 시행.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R17</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">모든 MTC의 완전한 병리 소견은 College of American Pathologists 갑상선암 병리 프로토콜의 요약 보고 지침을 따를 것.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R18</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C: 전문가 의견">C</span></div>
+          <div class="rec-text">갑상선 전체에 대한 형태학적 검사: CCH 또는 다초점 신생물 여부 확인 권고.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FNA -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔍</span> FNA 및 갑상선 결절 평가 (권고 19–20)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info">
+        <span>ℹ️</span>
+        <div>FNA의 MTC 세포학적 특징: 소집합 다형성 세포, azurophilic 세포질 과립, 편심핵, "salt and pepper" 염색질, 아밀로이드. 그러나 FNA 단독 민감도 &lt;50% (15개 문헌 메타분석). FNA 세척액 Calcitonin 측정이 민감도를 현저히 향상.</div>
+      </div>
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R19</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">≥1 cm 갑상선 결절(초음파 특성 고려)에서 FNA 시행. FNA 결과가 비결정적이거나 MTC 의심 시 → FNA 세척액 Calcitonin 측정 + Calcitonin·chromogranin·CEA 면역조직화학(thyroglobulin 음성 확인).</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R20</span>
+          <div class="rec-badges"><span class="grade grade-i" data-tip="I: 근거 불충분, 임상의 판단">I</span></div>
+          <div class="rec-text">결절성 갑상선 질환 환자에서 혈청 Calcitonin 스크리닝의 유용성은 논쟁 중. 전문가 의견이 상이하며 임상의가 개별적으로 판단.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 수술 전 영상 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📷</span> 수술 전 영상 검사 (권고 21–23)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <table class="mtc-table">
+            <tr><th>영상 검사</th><th>주요 용도</th><th>권고 강도</th></tr>
+            <tr><td>경부 초음파</td><td>모든 MTC 환자 (1차 검사)</td><td><span class="grade grade-c" data-tip="C">C</span></td></tr>
+            <tr><td>경부·흉부 조영 CT</td><td>폐·종격동 림프절 전이 (Calcitonin ≥500 pg/mL)</td><td><span class="grade grade-c" data-tip="C">C</span></td></tr>
+            <tr><td>간 3상 CT 또는 조영 MRI</td><td>간 전이 (가장 민감)</td><td><span class="grade grade-c" data-tip="C">C</span></td></tr>
+            <tr><td>축골 MRI + 골스캔</td><td>골 전이 (상호 보완적)</td><td><span class="grade grade-c" data-tip="C">C</span></td></tr>
+            <tr><td>FDG-PET/CT, F-DOPA PET/CT</td><td>원격 전이 검출 — <strong>비권고</strong></td><td><span class="grade grade-e" data-tip="E: 비권고">E</span></td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-success">
+            <span>✅</span>
+            <div>수술 전 Calcitonin &lt;500 pg/mL: 300명 연구에서 원격 전이 없음. 단, 광범위 경부 병변이나 원격 전이 증상 시에는 Calcitonin 무관하게 영상 검사 시행.</div>
+          </div>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>📌</span>
+            <div>FDG-PET/CT와 F-DOPA PET/CT: 비용 및 선택 기준 문제로 현시점 일상적 사용 비권고. 단, 재발 MTC에서 두 영상이 상호보완적 가치 있음.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-diagnosis -->
+
+<!-- ═══════════════ SURGERY ═══════════════ -->
+<div id="tab-surgery" class="panel">
+
+  <!-- 초기 수술 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔪</span> 초기 수술 (권고 24–26)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>MTC의 유일한 근치적 치료는 <strong>완전 갑상선 전절제술 + 구획 지향 림프절 청소술</strong>. 산발성·유전성 모두 동일 원칙. 촉지 가능 MTC의 75% 이상에서 림프절 전이 존재.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">림프절 전이 패턴 (195명 연구)</div>
+          <table class="mtc-table">
+            <tr><th>중앙 구획 (Level VI) 전이 수</th><th>동측 측경부 전이율</th><th>대측 측경부 전이율</th></tr>
+            <tr><td>0개</td><td>10.1%</td><td>4.9%</td></tr>
+            <tr><td>1–3개</td><td>77%</td><td>38%</td></tr>
+            <tr><td>≥4개</td><td>98%</td><td>77%</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">측경부 청소술 합병증</div>
+          <table class="mtc-table">
+            <tr><th>합병증</th><th>빈도</th></tr>
+            <tr><td>림프 누출</td><td>0.5–8%</td></tr>
+            <tr><td>부신경 손상 → 어깨 기능 장애</td><td>25–50%</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>대측 측경부 전이 → 치유 불가능 질환의 표지. 따라서 초회 수술 시 충분한 림프절 청소술이 필수.</div>
+          </div>
+        </div>
+      </div>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R24</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">초음파상 경부 림프절 전이 없고 원격 전이 없는 MTC: <strong>갑상선 전절제술 + 중앙 구획(Level VI) 림프절 청소술</strong> 시행.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R25</span>
+          <div class="rec-badges"><span class="grade grade-i" data-tip="I: 근거 불충분, 전문가 의견 상이">I</span></div>
+          <div class="rec-text">초음파 음성, 원격 전이 없는 MTC에서 측경부(Level II–V) 청소술: Calcitonin 수치에 따라 고려할 수 있으나 Task Force 내 합의 미달.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R26</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C: 전문가 의견">C</span></div>
+          <div class="rec-text">경부 및 경부 림프절에 국한된 MTC: 갑상선 전절제술 + 중앙 구획 + 침범된 측경부 청소술(Level II–V). 동측 양성이나 대측 음성이면 Calcitonin >200 pg/mL 시 대측 경부도 고려.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 불완전 절제 후 관리 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔄</span> 불완전 절제 후 관리 (권고 27–29)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R27</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">광범위 경부 또는 전이성 MTC: 발성·연하·부갑상선 기능·어깨 움직임 보존을 위해 덜 공격적인 수술 가능. EBRT·전신치료 병행 고려.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R28</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">편측 갑상선 절제 후 산발성 MTC 확인 시 완결 갑상선 절제술 권고 상황: ① RET 생식세포 돌연변이 ② 수술 후 Calcitonin 상승 ③ 잔류 MTC 영상 확인. 정상 Calcitonin + 정상 크기 림프절만으로는 재수술 불필요.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R29</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">초회 수술 시 림프절 청소술 불충분한 경우의 재수술 권고 요건: ① 수술 전 기저 Calcitonin &lt;1000 pg/mL ② 초회 수술 시 전이 림프절 ≤5개.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 부갑상선 관리 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫘</span> 부갑상선 및 호르몬 대치 요법 (권고 30–32)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R30</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">갑상선 전절제술 시 정상 부갑상선은 혈관경 보존. 혈류 불확실 시: 산발성 MTC·MEN2B·HPTH 드문 MEN2A 돌연변이 → 흉쇄유돌근에 이식. HPTH 빈번 MEN2A 돌연변이(C634 등) → 이소성 근육(상완요골근)에 이식.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R31</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">수술 후 4–6주 내 TSH 측정. MTC는 여포세포 종양이 아니므로 TSH 억제 불필요. <strong>TSH를 정상 범위로 유지</strong>하는 레보티록신 대치 요법.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R32</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">수술 후 혈청 칼슘 모니터링. 증상성 저칼슘혈증 → 경구 칼슘 + 비타민 D 투여. 약물 이탈이 안 될 경우 장기 대치 요법.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 예방적 갑상선 절제술 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🧒</span> 유전성 MTC 소아의 예방적 갑상선 절제술 (권고 33–36)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>MEN2는 예방적 수술의 이상적 조건 충족: ① 완전 침투 유전 돌연변이 ② 신뢰할 수 있는 유전 검사 ③ 장기 대체 가능 ④ 최소 이환율 ⑤ 치유 확인 가능. 유일한 질문은 "언제 수술하는가".</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;margin-bottom:6px">위험도별 수술 시기</div>
+          <table class="mtc-table">
+            <tr><th>ATA 위험도</th><th>수술 시기</th><th>추적 시작</th></tr>
+            <tr><td><span class="risk-hst">HST</span></td><td>생후 1년 이내 (수개월 내)</td><td>수술 후 6개월마다</td></tr>
+            <tr><td><span class="risk-h">H</span></td><td>5세 이하, Calcitonin 상승 시 즉시</td><td>3세부터 초음파+Calcitonin</td></tr>
+            <tr><td><span class="risk-mod">MOD</span></td><td>Calcitonin 상승 시 (수년~수십 년 가능)</td><td>5세부터 초음파+Calcitonin</td></tr>
+          </table>
+        </div>
+        <div>
+          <div class="alert alert-danger">
+            <span>⚠️</span>
+            <div><strong>2세 미만 소아 수술</strong>: 부갑상선 동정이 어려워 영구적 부갑상선기능저하증 위험 증가. 경험 많은 소아내분비·소아외과 팀 필수.</div>
+          </div>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>📌</span>
+            <div>ATA-H 소아: 수술 전 Calcitonin &lt;40 pg/mL이면 level VI 림프절 청소술 생략 가능 → 부갑상선·후두신경 손상 위험 감소.</div>
+          </div>
+        </div>
+      </div>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R33</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">MEN2A/2B 소아는 <strong>3차 의료기관의 경험 있는 의사·외과의</strong>가 관리해야 함.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R34</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">ATA-HST (M918T): <strong>생후 1년 이내</strong> 갑상선 전절제술. Level VI 청소술 수행 여부는 부갑상선 동정 가능 여부에 따라 결정. 수술 시기는 외과의·소아과의·부모 협의.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R35</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">ATA-H: <strong>5세 이하</strong>에 갑상선 전절제술. Calcitonin >40 pg/mL 또는 영상/육안에서 림프절 전이 시 level VI 청소술 포함.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R36</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">ATA-MOD: 5세부터 초음파·Calcitonin 추적. Calcitonin 상승 시 수술 시행. 장기 추적을 원치 않는 부모의 경우 5세 경 예방적 수술 선택 가능.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PHEO·HPTH 관리 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🫀</span> MEN2 관련 PHEO 및 HPTH 관리 (권고 37–44)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:6px">PHEO 관리 핵심 원칙</div>
+          <div class="alert alert-danger">
+            <span>⚠️</span>
+            <div>진단 안 된 PHEO를 가진 채로 갑상선 수술 시 치명적 부정맥 및 사망 위험. <strong>갑상선 수술 전 반드시 PHEO 배제</strong> (혈장 유리 메타네프린 또는 24시간 소변 분획 메타네프린).</div>
+          </div>
+          <ul class="rec-list" style="margin-top:6px">
+            <li class="rec-item">
+              <span class="rec-num">R37</span>
+              <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+              <div class="rec-text">PHEO 스크리닝 시작 연령: ATA-H/HST → <strong>11세</strong>, ATA-MOD → <strong>16세</strong>. 검사: 혈장 유리 메타네프린·노르메타네프린 또는 24시간 소변 분획 메타네프린.</div>
+            </li>
+            <li class="rec-item">
+              <span class="rec-num">R38</span>
+              <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+              <div class="rec-text">나이·증상에 무관하게 모든 MEN2 환자는 갑상선 수술 전 PHEO 배제 필수. 임신 계획 또는 임신 중인 MEN2 여성도 마찬가지.</div>
+            </li>
+            <li class="rec-item">
+              <span class="rec-num">R39</span>
+              <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+              <div class="rec-text">PHEO와 MTC가 공존 시 <strong>PHEO를 먼저 수술</strong> (MTC 또는 HPTH 수술 전).</div>
+            </li>
+            <li class="rec-item">
+              <span class="rec-num">R40</span>
+              <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+              <div class="rec-text">적절한 수술 전 준비 후 복강경 또는 후복막강경 부신 절제술 시행. 부신 피질 기능 보존을 위한 부분 부신 절제술 고려 가능.</div>
+            </li>
+            <li class="rec-item">
+              <span class="rec-num">R41</span>
+              <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+              <div class="rec-text">부신 제거 환자: 당질코르티코이드·광질코르티코이드 대치 요법, 부신 위기 위험 교육, 의료 경고 팔찌 착용.</div>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:var(--yellow);margin-bottom:6px">HPTH 관리</div>
+          <div class="alert alert-info">
+            <span>ℹ️</span>
+            <div>MEN2A의 HPTH는 대개 경미·무증상. C634 돌연변이: ~30% 침투율. Exon 10 돌연변이: 2–12%.</div>
+          </div>
+          <ul class="rec-list" style="margin-top:6px">
+            <li class="rec-item">
+              <span class="rec-num">R42</span>
+              <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+              <div class="rec-text">HPTH 스크리닝: ATA-H → 11세, ATA-MOD → 16세 (PHEO 스크리닝과 동시 시행).</div>
+            </li>
+            <li class="rec-item">
+              <span class="rec-num">R43</span>
+              <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+              <div class="rec-text">HPTH 환자에서 육안 비대 부갑상선만 제거. 4개 모두 비대 시: 부분 부갑상선 절제술(1개를 혈관경에 남김) 또는 전부갑상선 절제술 + 이소성 자가이식.</div>
+            </li>
+            <li class="rec-item">
+              <span class="rec-num">R44</span>
+              <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+              <div class="rec-text">갑상선 절제술 후 발생한 HPTH: 재수술 전 국소화 검사(세스타미비 스캔·초음파·CT) 시행 후 비대 부갑상선 제거 + 수술 중 PTH 모니터링.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-surgery -->
+
+<!-- ═══════════════ FOLLOW-UP ═══════════════ -->
+<div id="tab-followup" class="panel">
+
+  <!-- 수술 후 평가 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📊</span> 수술 후 평가 및 예후 예측 (권고 45–49)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="grid2" style="gap:8px">
+        <div>
+          <div class="alert alert-teal">
+            <span>📌</span>
+            <div>수술 후 Calcitonin &lt;10 pg/mL → 생화학적 완치. 3·5년 무재발 생존율 각 94%, 90%. Calcitonin 정상화 후 3.7%에서 7.5년 내 재발 보고.</div>
+          </div>
+          <table class="mtc-table" style="margin-top:8px">
+            <tr><th>수술 후 Calcitonin</th><th>대응</th></tr>
+            <tr><td>측정 불가 또는 정상</td><td>6개월·1년 추적 후 연 1회</td></tr>
+            <tr><td>&lt;150 pg/mL (상승)</td><td>경부 초음파. 음성이면 6개월마다 Calcitonin·CEA·초음파</td></tr>
+            <tr><td>≥150 pg/mL</td><td>전이 영상 시행 (CT·MRI·골스캔)</td></tr>
+          </table>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Calcitonin·CEA 배가 시간 (Doubling Time)</div>
+          <table class="mtc-table">
+            <tr><th>배가 시간</th><th>5년 생존율</th><th>10년 생존율</th></tr>
+            <tr><td>&lt;6개월</td><td>25%</td><td>8%</td></tr>
+            <tr><td>6–24개월</td><td>92%</td><td>37%</td></tr>
+            <tr><td>&gt;24개월</td><td>연구 종료까지 생존</td><td>—</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>Calcitonin 배가 시간이 CEA보다 우수한 독립 예후 예측 인자. 최소 4개 데이터 포인트·2년 이상 측정 필요. ATA 계산기: thyroid.org</div>
+          </div>
+        </div>
+      </div>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R45</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">장기 추적 계획 수립 시 TNM 병기·림프절 전이 수·수술 후 Calcitonin 수치를 종합하여 예후 판정.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R46</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">수술 후 3개월에 Calcitonin·CEA 측정. 측정 불가/정상 시 → 6개월마다 1년간, 이후 연 1회.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R47</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">수술 후 Calcitonin 상승 &lt;150 pg/mL: 경부 초음파. 음성이면 6개월마다 신체 검진·Calcitonin·CEA·초음파.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R48</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">수술 후 Calcitonin ≥150 pg/mL: 경부 초음파·흉부 CT·간 조영 MRI 또는 3상 CT·골스캔·골반 축골 MRI로 전이 탐색.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R49</span>
+          <div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div>
+          <div class="rec-text">수술 후 상승된 Calcitonin·CEA는 최소 6개월마다 측정하여 배가 시간 산출.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 원격 전이 평가 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>🔭</span> 원격 전이 진단·치료 (권고 50–62)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warn">
+        <span>⚠️</span>
+        <div>원격 전이 MTC는 불치. 관리 목표: 국소-지역 병 조절, 호르몬 과잉 완화, 증상성 전이 완화, 생명을 위협하는 전이 조절.</div>
+      </div>
+      <table class="mtc-table" style="margin-top:8px">
+        <tr><th>전이 부위</th><th>권고 치료</th><th>권고 번호</th></tr>
+        <tr><td>뇌 전이 (1–5%)</td><td>고립성: 수술 또는 정위방사선수술. 다발성: 전뇌 EBRT</td><td>R55</td></tr>
+        <tr><td>골 전이</td><td>척수 압박: 응급 글루코코르티코이드·수술적 감압. 골절: 수술·열절제·시멘트·EBRT. 데노수맙 또는 비스포스포네이트</td><td>R56–58</td></tr>
+        <tr><td>폐·종격동 전이</td><td>고립성 대형: 수술. 소형 말초성: 고주파 절제. 다발 진행성: 전신치료</td><td>R59</td></tr>
+        <tr><td>간 전이 (진행성 45%)</td><td>대형 고립성: 수술. 직경 &lt;30 mm·간 30% 미만: 화학색전술. 반복 치료 가능</td><td>R60</td></tr>
+        <tr><td>피부 전이 (드묾)</td><td>가능 시 수술. 다발: EBRT 또는 에탄올 주사</td><td>R61</td></tr>
+        <tr><td>완화 치료</td><td>수술·EBRT·전신치료로 통증·기계적 압박·호르몬 과잉 완화</td><td>R62</td></tr>
+      </table>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R50</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">지속성·재발 국소 MTC (원격 전이 없음): 중앙(Level VI) 또는 측경부(Level II–V)에서 영상 또는 생검 양성 부위에 대한 구획 지향 경부 청소술. 단순 종양 절제술(berry-picking)은 피할 것.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R51</span>
+          <div class="rec-badges"><span class="grade grade-e" data-tip="E: 비권고">E</span></div>
+          <div class="rec-text">갑상선 전절제술 후 방사성 요오드(RAI) 치료는 MTC에 적응이 없음. 단, 지역 또는 원격 전이가 MTC와 PTC/FTC 혼합인 드문 경우에 한해 고려.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R52</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">재발 고위험 환자(미경 또는 육안 잔류 MTC, 갑상선 외 침범, 광범위 림프절 전이), 기도 폐쇄 위험군에서 수술 후 경부·종격동 EBRT 보조 치료 고려. 편익·독성 비율 고려 필수.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R53</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">Calcitonin·CEA 상승 중이나 원격 전이 영상 미확인 시, 또는 배가 시간 >2년인 저용적 안정 전이 시 전신치료 불필요.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R54</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">재수술 전 복강경 또는 개복 간 검사·생검으로 잠재 간 전이 배제 고려.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 설사·이소성 쿠싱 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 호르몬 활성 전이 치료 (권고 66–67)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <ul class="rec-list">
+        <li class="rec-item">
+          <span class="rec-num">R66</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text"><strong>설사</strong> (진행성 MTC의 흔한 증상): 1차 — 로페라미드·디페녹실레이트/아트로핀·코데인 등 지사제. 대안 — 소마토스타틴 유사체, 수술·화학색전술.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R67</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text"><strong>이소성 쿠싱 증후군</strong> (MTC의 1–3%): 예후 불량 시에도 치료 권고. 케토코나졸·미페프리스톤·아미노글루테티미드·메티라폰·미토탄 등 약물치료. 약물치료 불응 시 양측 부신 절제술 고려. Vandetanib 투여 후 역전 보고.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- /tab-followup -->
+
+<!-- ═══════════════ SYSTEMIC ═══════════════ -->
+<div id="tab-systemic" class="panel">
+
+  <!-- TKI -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>💊</span> 티로신 키나아제 억제제(TKI) — 표적 치료 (권고 63–65)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-teal">
+        <span>📌</span>
+        <div>RET·VEGFR을 동시 표적하는 TKI 2종이 FDA·EMA 승인. <strong>Vandetanib(2011)</strong>과 <strong>Cabozantinib(2012)</strong>. 전신치료는 상당한 종양 부하와 문서화된 진행성 MTC에서 시행.</div>
+      </div>
+      <div class="grid2" style="gap:8px;margin-top:8px">
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Vandetanib (표적: RET, EGFR, VEGFR)</div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>용량</td><td>300 mg/일 (FDA 승인)</td></tr>
+            <tr><td>Phase III 결과</td><td>PFS 중앙값: 위약 19.3개월 → 30.5개월 (예측)</td></tr>
+            <tr><td>객관적 반응률</td><td>45% (부분 반응)</td></tr>
+            <tr><td>HR</td><td>0.46 (p&lt;0.0001)</td></tr>
+            <tr><td>주요 이상반응</td><td>설사, 피로, 발진, QTc 연장, 고혈압, 광감작</td></tr>
+            <tr><td>용량 감소</td><td>35%, 치료 중단 12%</td></tr>
+          </table>
+          <div class="alert alert-warn" style="margin-top:6px">
+            <span>⚠️</span>
+            <div>QTc 연장 → REMS 등록 필수 (FDA). 기저 심전도 및 정기적 모니터링 필요.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Cabozantinib (표적: RET, c-MET, VEGFR)</div>
+          <table class="mtc-table">
+            <tr><th>항목</th><th>내용</th></tr>
+            <tr><td>용량</td><td>140 mg/일 (FDA 승인)</td></tr>
+            <tr><td>Phase III 결과</td><td>PFS: 위약 4개월 → 11.2개월</td></tr>
+            <tr><td>객관적 반응률</td><td>28%</td></tr>
+            <tr><td>HR</td><td>0.28 (p&lt;0.0001)</td></tr>
+            <tr><td>주요 이상반응</td><td>설사, 복통, 피로, 고혈압, 수족증후군, 소화관 누공</td></tr>
+            <tr><td>용량 감소</td><td>79%, 치료 중단 16%</td></tr>
+          </table>
+          <div class="alert alert-info" style="margin-top:6px">
+            <span>ℹ️</span>
+            <div>RET 또는 RAS 돌연변이 MTC 모두에서 유효. c-MET 표적 → Vandetanib과 다른 내성 기전 극복 가능성.</div>
+          </div>
+        </div>
+      </div>
+      <ul class="rec-list" style="margin-top:8px">
+        <li class="rec-item">
+          <span class="rec-num">R63</span>
+          <div class="rec-badges"><span class="grade grade-d" data-tip="D: 비권고 (expert opinion)">D</span></div>
+          <div class="rec-text">단일제 또는 복합 세포독성 화학요법은 새로운 치료 옵션 등장으로 지속성·재발 MTC의 <strong>1차 치료로 권고하지 않음</strong>. 반응률 15–20%에 불과.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R64</span>
+          <div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div>
+          <div class="rec-text">방사성 동위원소 치료 또는 사전 표적 방사면역치료는 일부 선별 환자에서, 이상적으로는 잘 설계된 임상시험 맥락에서 고려.</div>
+        </li>
+        <li class="rec-item">
+          <span class="rec-num">R65</span>
+          <div class="rec-badges"><span class="grade grade-a" data-tip="A: 강력한 권고">A</span></div>
+          <div class="rec-text">상당한 종양 부하와 RECIST 기준 증상성 또는 진행성 전이 MTC: <strong>RET·VEGFR 표적 TKI 전신치료</strong> 고려. Vandetanib 또는 Cabozantinib을 1차 단일제 치료로 사용.</div>
+        </li>
+      </ul>
+      <div class="alert alert-warn" style="margin-top:8px">
+        <span>📌</span>
+        <div><strong>미해결 과제</strong>: ① Vandetanib vs Cabozantinib 1차 선택 기준 불명 ② TKI 내성 기전 ③ 전체 생존율(OS) 개선 여부 미확인 ④ 안정 질환에서 치료 중단 시기. 만성 일일 복용 필요하며 독성 중요.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-systemic -->
+
+<!-- ═══════════════ RECS ALL ═══════════════ -->
+<div id="tab-recs" class="panel">
+
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📋</span> 권고 등급 기준 (ATA 적응)</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <table class="mtc-table">
+        <tr><th>등급</th><th>정의</th></tr>
+        <tr><td><span class="grade grade-a" data-tip="A">A</span></td><td><strong>강력 권고</strong>: 대표 집단에서 중요한 건강 결과를 개선할 수 있는 서비스 또는 중재에 대한 충분한 근거. 잘 설계된 연구의 일관된 결과.</td></tr>
+        <tr><td><span class="grade grade-b" data-tip="B">B</span></td><td><strong>권고</strong>: 공정한 근거. 건강 결과에 대한 효과 결정이 가능하나 연구 수·질·일관성·일반화 가능성·간접 근거로 제한.</td></tr>
+        <tr><td><span class="grade grade-c" data-tip="C">C</span></td><td><strong>권고</strong>: 전문가 의견에 근거.</td></tr>
+        <tr><td><span class="grade grade-d" data-tip="D">D</span></td><td><strong>비권고</strong>: 전문가 의견에 근거한 반대 권고.</td></tr>
+        <tr><td><span class="grade grade-e" data-tip="E">E</span></td><td><strong>비권고</strong>: 서비스 또는 중재가 중요 건강 결과를 개선하지 않거나 해가 이익을 초과한다는 공정한 근거.</td></tr>
+        <tr><td><span class="grade grade-i" data-tip="I">I</span></td><td><strong>권고 없음</strong>: 근거 불충분. 서비스·중재가 중요 건강 결과를 개선한다는 근거 부재, 질 낮음, 또는 상충. 이익·위해 균형 결정 불가.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 권고 전체 요약 -->
+  <div class="card">
+    <div class="card-header open" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📝</span> 전체 67개 권고 요약</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+
+      <!-- 섹션 A: 위험도 분류 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🎯 ATA 위험도 분류 및 MEN2 증후군 (R1–2)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R1</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">ATA 위험도 재분류: 이전 D → <strong>HST(최고위험)</strong> [M918T/MEN2B], C → <strong>H(고위험)</strong> [C634/A883F], A+B → <strong>MOD(중등위험)</strong> [그 외 모든 RET 돌연변이].</div></li>
+            <li class="rec-item"><span class="rec-num">R2</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">MEN2 증후군은 MEN2A와 MEN2B 2가지. MEN2A 내 4가지 변형: 고전적 MEN2A, MEN2A+CLA, MEN2A+HD, FMTC 변형.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 섹션 B: 유전자 검사 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🧬 RET 유전자 검사 (R3–9)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R3</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">MEN2A 초기 검사: exon 10(609,611,618,620), exon 11(630,634) 및 exon 8,13,14,15,16 단일 또는 다단계 분석.</div></li>
+            <li class="rec-item"><span class="rec-num">R4</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">돌연변이 미검출 또는 표현형-유전형 불일치 시 전체 코딩 영역 염기서열 분석.</div></li>
+            <li class="rec-item"><span class="rec-num">R5</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">MEN2B 의심: exon 16(M918T) → exon 15(A883F) → 전체 코딩 영역.</div></li>
+            <li class="rec-item"><span class="rec-num">R6</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">모든 산발성 MTC 환자에서 RET 생식세포 돌연변이 검사. 양성 시 유전 상담·가족 검사.</div></li>
+            <li class="rec-item"><span class="rec-num">R7</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">유전 상담·검사 대상: ① 유전성 MTC 1차 가족 ② MEN2B 표현형 영아·소아 부모 ③ CLA 환자 ④ exon 10 RET 돌연변이 HD 환자 또는 MEN2A 성인.</div></li>
+            <li class="rec-item"><span class="rec-num">R8</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">산발성 MTC 종양 조직 체세포 RAS·RET M918T 검사는 학문적 목적 또는 의사 선호에 따라 시행 — 표준 관행 아님.</div></li>
+            <li class="rec-item"><span class="rec-num">R9</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">전체 RET 코딩 영역 음성인 드문 MEN2 가족: 1–3년 간격 MTC·PHEO·HPTH 스크리닝.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 섹션 C: 윤리 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>⚖️ 유전 스크리닝 윤리 (R10–12)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R10</span><div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div><div class="rec-text">유전성 MTC: 가족 위험 경고 의무가 치료 표준. 유전 상담에서 이행. 환자 거부 시 의사의 윤리적 경고 의무 판단 필요.</div></li>
+            <li class="rec-item"><span class="rec-num">R11</span><div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div><div class="rec-text">동의 능력 미달 소아에서 부모가 위험 공개 거부 시 국가 개입 필요할 수 있음.</div></li>
+            <li class="rec-item"><span class="rec-num">R12</span><div class="rec-badges"><span class="grade grade-a" data-tip="A">A</span></div><div class="rec-text">생식 연령의 RET 돌연변이 보유자에게 PGD 및 산전 검사 선택지 안내. MEN2B에서 특히 중요.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 섹션 D: 종양 표지자 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🧪 분비 산물 및 병리 (R13–20)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R13</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">Calcitonin 위상승 가능 질환(만성 신부전, HPTH, 자가면역 갑상선염, 소세포폐암 등) 인지. 이상 소견 시 감별 고려.</div></li>
+            <li class="rec-item"><span class="rec-num">R14</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">3세 미만(특히 6개월 미만) 소아와 남성에서 Calcitonin 수치가 높다는 점 해석에 반드시 고려.</div></li>
+            <li class="rec-item"><span class="rec-num">R15</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">기저 Calcitonin·CEA 동시 측정. 진행성 MTC에서 CEA >> Calcitonin 불균형 또는 두 표지자 모두 낮음 → 탈분화 MTC 시사.</div></li>
+            <li class="rec-item"><span class="rec-num">R16</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">MTC 의심 종양: Calcitonin·chromogranin·CEA 양성, thyroglobulin 음성 면역조직화학 시행.</div></li>
+            <li class="rec-item"><span class="rec-num">R17</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">모든 MTC 완전한 병리 소견 기록: CAP 갑상선암 병리 프로토콜 요약 보고 지침 준수.</div></li>
+            <li class="rec-item"><span class="rec-num">R18</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">갑상선 전체 형태학적 검사로 CCH 또는 다초점 신생물 확인.</div></li>
+            <li class="rec-item"><span class="rec-num">R19</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">≥1 cm 갑상선 결절에서 FNA 시행. 비결정적·MTC 의심 시 FNA 세척액 Calcitonin + IHC.</div></li>
+            <li class="rec-item"><span class="rec-num">R20</span><div class="rec-badges"><span class="grade grade-i" data-tip="I: 근거 불충분">I</span></div><div class="rec-text">결절성 갑상선 질환에서 Calcitonin 스크리닝: 전문가 의견 상이, 임상의 개별 판단.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 섹션 E: 영상·수술 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🔪 영상 검사 및 초기 수술 (R21–32)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R21</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">MTC 확진 시: 신체 검진·Calcitonin·CEA·RET 생식세포 돌연변이 검사. 유전성 MTC에서 PHEO·HPTH 배제.</div></li>
+            <li class="rec-item"><span class="rec-num">R22</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">모든 MTC 경부 초음파. 광범위 경부 병변·원격 전이 증상·Calcitonin ≥500 pg/mL → 조영 CT(경부·흉부)·간 CT/MRI·골스캔·축골 MRI.</div></li>
+            <li class="rec-item"><span class="rec-num">R23</span><div class="rec-badges"><span class="grade grade-e" data-tip="E: 비권고">E</span></div><div class="rec-text">FDG-PET/CT·F-DOPA PET/CT는 원격 전이 검출 목적으로 권고하지 않음.</div></li>
+            <li class="rec-item"><span class="rec-num">R24</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">초음파 음성·원격 전이 없는 MTC: 갑상선 전절제술 + Level VI 림프절 청소술.</div></li>
+            <li class="rec-item"><span class="rec-num">R25</span><div class="rec-badges"><span class="grade grade-i" data-tip="I">I</span></div><div class="rec-text">초음파 음성 MTC에서 측경부(Level II–V) 청소술: Calcitonin에 따라 고려 가능, 합의 미달.</div></li>
+            <li class="rec-item"><span class="rec-num">R26</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">경부 국한 MTC + 침범 측경부: 갑상선 전절제 + Level VI + 침범 Level II–V. 대측 Calcitonin >200 pg/mL 시 대측 경부 청소 고려.</div></li>
+            <li class="rec-item"><span class="rec-num">R27</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">광범위 경부·전이 MTC: 발성·연하·부갑상선·어깨 기능 보존 중심. EBRT·전신치료 병행.</div></li>
+            <li class="rec-item"><span class="rec-num">R28</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">편측 절제 후 산발성 MTC: 완결 갑상선 절제술 권고 조건 — RET 돌연변이, 수술 후 Calcitonin 상승, 잔류 MTC 영상 확인.</div></li>
+            <li class="rec-item"><span class="rec-num">R29</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">초회 수술 불충분 림프절 청소 후 재수술 권고 요건: 수술 전 Calcitonin &lt;1000 pg/mL + 초회 전이 림프절 ≤5개.</div></li>
+            <li class="rec-item"><span class="rec-num">R30</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">갑상선 전절제 시 정상 부갑상선 혈관경 보존. 혈류 불확실 시 이식 — 증후군·돌연변이에 따라 흉쇄유돌근 또는 이소성 근육(상완요골근)에 이식.</div></li>
+            <li class="rec-item"><span class="rec-num">R31</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">수술 후 4–6주 TSH 측정. TSH 정상 범위 유지하는 레보티록신 대치 요법 (TSH 억제 불필요).</div></li>
+            <li class="rec-item"><span class="rec-num">R32</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">수술 후 혈청 칼슘 모니터링. 증상 저칼슘혈증 시 경구 칼슘·비타민 D.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 섹션 F: 예방적 수술 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>🧒 예방적 갑상선 절제술 및 PHEO·HPTH (R33–44)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R33</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">MEN2A/2B 소아는 3차 의료기관의 경험 있는 의사·외과의가 관리.</div></li>
+            <li class="rec-item"><span class="rec-num">R34</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">ATA-HST(M918T): 생후 1년 이내 갑상선 전절제술. Level VI 수행 여부는 부갑상선 동정 가능성에 따라 결정.</div></li>
+            <li class="rec-item"><span class="rec-num">R35</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">ATA-H: 5세 이하 갑상선 전절제술. Calcitonin >40 pg/mL 또는 영상 양성 시 Level VI 포함.</div></li>
+            <li class="rec-item"><span class="rec-num">R36</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">ATA-MOD: 5세부터 초음파·Calcitonin 추적. 수술 시기는 Calcitonin 상승 시 결정.</div></li>
+            <li class="rec-item"><span class="rec-num">R37</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">PHEO 스크리닝 시작 연령: ATA-H/HST → 11세, ATA-MOD → 16세. 혈장 유리 메타네프린·노르메타네프린 또는 24시간 소변 검사.</div></li>
+            <li class="rec-item"><span class="rec-num">R38</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">모든 MEN2 환자, 나이·증상 무관, 모든 갑상선 수술 전 PHEO 배제 필수. 임신 중·임신 계획 여성 포함.</div></li>
+            <li class="rec-item"><span class="rec-num">R39</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">PHEO와 MTC 공존 시 PHEO 먼저 수술.</div></li>
+            <li class="rec-item"><span class="rec-num">R40</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">PHEO: 복강경 또는 후복막강경 부신 절제술. 부분 부신 절제술 고려 가능.</div></li>
+            <li class="rec-item"><span class="rec-num">R41</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">부신 없는 환자: 당질·광질코르티코이드 대치, 부신 위기 교육, 의료 경고 팔찌 착용.</div></li>
+            <li class="rec-item"><span class="rec-num">R42</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">HPTH 스크리닝: ATA-H → 11세, ATA-MOD → 16세 (PHEO 스크리닝과 동시).</div></li>
+            <li class="rec-item"><span class="rec-num">R43</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">HPTH: 육안 비대 부갑상선만 제거. 4개 모두 비대 시 부분 또는 전부갑상선 절제술 + 이소성 자가이식.</div></li>
+            <li class="rec-item"><span class="rec-num">R44</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">갑상선 절제 후 발생 HPTH: 재수술 전 국소화 검사(세스타미비·초음파·CT) + 수술 중 PTH 모니터링.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 섹션 G: 추적관찰 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>📊 수술 후 추적관찰·재발 치료 (R45–62)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R45</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">예후 판정·장기 추적 계획: TNM 병기·림프절 전이 수·수술 후 Calcitonin 수치 종합.</div></li>
+            <li class="rec-item"><span class="rec-num">R46</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">수술 후 3개월 Calcitonin·CEA. 측정 불가/정상 → 6개월·1년 추적, 이후 연 1회.</div></li>
+            <li class="rec-item"><span class="rec-num">R47</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">수술 후 Calcitonin 상승 &lt;150 pg/mL + 신체검진·초음파 음성 → 6개월마다 추적.</div></li>
+            <li class="rec-item"><span class="rec-num">R48</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">수술 후 Calcitonin ≥150 pg/mL → 전이 영상 시행(경부 초음파·흉부 CT·간 조영 CT 또는 MRI·골스캔·골반·축골 MRI).</div></li>
+            <li class="rec-item"><span class="rec-num">R49</span><div class="rec-badges"><span class="grade grade-b" data-tip="B">B</span></div><div class="rec-text">상승된 Calcitonin·CEA는 최소 6개월마다 측정하여 배가 시간 산출.</div></li>
+            <li class="rec-item"><span class="rec-num">R50</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">지속·재발 국소 MTC (원격 전이 없음): 영상·생검 양성 구획 지향 경부 청소술. Berry-picking 수술 회피.</div></li>
+            <li class="rec-item"><span class="rec-num">R51</span><div class="rec-badges"><span class="grade grade-e" data-tip="E: 비권고">E</span></div><div class="rec-text">MTC 갑상선 절제술 후 방사성 요오드 치료 적응증 없음. 드문 MTC+PTC/FTC 혼합 전이 시만 고려.</div></li>
+            <li class="rec-item"><span class="rec-num">R52</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">고위험 재발 환자에서 수술 후 경부·종격동 EBRT 보조 치료 고려. 편익-독성 비율 고려 필수.</div></li>
+            <li class="rec-item"><span class="rec-num">R53</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">Calcitonin·CEA 상승 중이나 전이 영상 음성, 또는 배가 시간 >2년 안정 전이 시 전신치료 불필요.</div></li>
+            <li class="rec-item"><span class="rec-num">R54</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">재수술 전 복강경·개복 간 검사·생검으로 잠재 간 전이 배제 고려.</div></li>
+            <li class="rec-item"><span class="rec-num">R55</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">뇌 전이 + 신경학적 증상: 뇌 영상 시행. 고립성 → 수술 또는 EBRT(정위방사선수술 포함). 다발성 → 전뇌 EBRT.</div></li>
+            <li class="rec-item"><span class="rec-num">R56</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">척수 압박: 응급 글루코코르티코이드 + 수술적 감압. 수술 불가 시 EBRT.</div></li>
+            <li class="rec-item"><span class="rec-num">R57</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">골절 또는 절박 골절: 수술·열절제(고주파 또는 냉동)·시멘트 주입·EBRT.</div></li>
+            <li class="rec-item"><span class="rec-num">R58</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">통증성 골 전이: 데노수맙 또는 비스포스포네이트 권고.</div></li>
+            <li class="rec-item"><span class="rec-num">R59</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">폐 전이: 고립성 대형 → 수술 고려. 말초 소형 → 고주파 절제. 다발 진행성 → 전신치료.</div></li>
+            <li class="rec-item"><span class="rec-num">R60</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">간 전이: 대형 고립성 → 수술. 직경 &lt;30 mm·간 30% 미만 다발성 → 화학색전술.</div></li>
+            <li class="rec-item"><span class="rec-num">R61</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">피부 전이: 가능 시 수술. 다발성 → EBRT 또는 에탄올 주사.</div></li>
+            <li class="rec-item"><span class="rec-num">R62</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">완화 치료: 통증·기계적 압박·호르몬 과잉 완화 위한 수술·EBRT·전신치료 고려.</div></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 섹션 H: 전신치료 -->
+      <div class="osa-acc">
+        <div class="osa-hdr" onclick="toggleOsa(this)">
+          <span>💊 전신치료·TKI·호르몬 활성 전이 (R63–67)</span>
+          <span>▾ 펼치기</span>
+        </div>
+        <div class="osa-body">
+          <ul class="rec-list">
+            <li class="rec-item"><span class="rec-num">R63</span><div class="rec-badges"><span class="grade grade-d" data-tip="D: 비권고">D</span></div><div class="rec-text">단일·복합 세포독성 화학요법을 지속·재발 MTC의 1차 치료로 권고하지 않음.</div></li>
+            <li class="rec-item"><span class="rec-num">R64</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">방사성 동위원소 치료·사전 표적 방사면역치료: 일부 선별 환자에서 임상시험 맥락에서 고려.</div></li>
+            <li class="rec-item"><span class="rec-num">R65</span><div class="rec-badges"><span class="grade grade-a" data-tip="A: 강력한 권고">A</span></div><div class="rec-text">상당한 종양 부하와 RECIST 기준 증상성·진행성 전이 MTC: RET·VEGFR 표적 TKI 전신치료. Vandetanib 또는 Cabozantinib 1차 단일제 치료.</div></li>
+            <li class="rec-item"><span class="rec-num">R66</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">진행성 MTC 설사: 1차 로페라미드·디페녹실레이트/아트로핀·코데인. 대안: 소마토스타틴 유사체, 수술·화학색전술.</div></li>
+            <li class="rec-item"><span class="rec-num">R67</span><div class="rec-badges"><span class="grade grade-c" data-tip="C">C</span></div><div class="rec-text">이소성 쿠싱 증후군 (ACTH·CRH 분비): 예후 불량 시에도 치료. 케토코나졸·미페프리스톤·메티라폰·미토탄. 불응 시 양측 부신 절제술.</div></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 약어 목록 -->
+  <div class="card">
+    <div class="card-header" onclick="toggleCard(this)">
+      <div class="ch-title"><span>📚</span> 약어 전체 목록</div>
+      <span class="toggle">▾</span>
+    </div>
+    <div class="card-body">
+      <div id="abbr-main-grid" class="abbr-grid-main"></div>
+    </div>
+  </div>
+
+</div><!-- /tab-recs -->
+
+</div><!-- /main -->
+
+<script>
+// ─── TABS ───
+function showTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+// ─── CARD ───
+function toggleCard(hdr) {
+  hdr.classList.toggle('open');
+  const body = hdr.nextElementSibling;
+  body.classList.toggle('collapsed');
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.card-header').forEach(hdr => {
+    const body = hdr.nextElementSibling;
+    if (!hdr.classList.contains('open')) {
+      body.classList.add('collapsed');
+    }
+  });
+});
+
+// ─── OSA ───
+function toggleOsa(hdr) {
+  const body = hdr.nextElementSibling;
+  const isOpen = body.style.display === 'block';
+  body.style.display = isOpen ? 'none' : 'block';
+  const span = hdr.querySelector('span:last-child');
+  span.textContent = isOpen ? '▾ 펼치기' : '▴ 접기';
+}
+
+// ─── ABBR ───
+const abbrs = [
+  ['MTC','Medullary Thyroid Carcinoma (갑상선수질암) — 방여포 C세포 유래 신경내분비종양; RET 원발암유전자 돌연변이가 핵심 병인'],
+  ['RET','REarranged during Transfection — 염색체 10q11.2 위치 티로신 키나아제 수용체 원발암유전자; 100개 이상 돌연변이가 MTC와 관련'],
+  ['MEN2','Multiple Endocrine Neoplasia Type 2 — MEN2A(95%)와 MEN2B(5%)로 구성; MTC를 공통 구성 요소로 포함'],
+  ['MEN2A','Multiple Endocrine Neoplasia Type 2A — MTC + PHEO + HPTH; RET exon 10/11 돌연변이(95%)'],
+  ['MEN2B','Multiple Endocrine Neoplasia Type 2B — MTC + PHEO + 특징적 표현형(마르판 체형, 신경절신경종증); RET M918T(95%) 또는 A883F'],
+  ['FMTC','Familial Medullary Thyroid Carcinoma — MEN2A의 변형; PHEO·HPTH 없이 MTC만 있는 가족 또는 개인'],
+  ['Calcitonin','Calcitonin (칼시토닌) — 32개 아미노산 펩타이드; C세포 종괴와 직접 비례; MTC의 핵심 종양 표지자'],
+  ['CEA','Carcinoembryonic Antigen (암배아항원) — MTC에서 Calcitonin과 병행 측정; 병기 진행·탈분화 지표'],
+  ['PHEO','Pheochromocytoma (갈색세포종) — 부신 수질 카테콜아민 분비 종양; MEN2에서 수술 전 반드시 배제'],
+  ['HPTH','Hyperparathyroidism (부갑상선기능항진증) — MEN2A에서 경미·무증상; C634 돌연변이에서 최대 30%'],
+  ['CLA','Cutaneous Lichen Amyloidosis (피부 지의 아밀로이드증) — MEN2A의 특수 변형; RET C634와 관련; 등 피부 소양증·색소 과침착'],
+  ['HD','Hirschsprung Disease (허쉬스프룽병) — 선천 거대결장; RET exon 10 돌연변이의 기능 소실 측면; MEN2A와 공존 가능'],
+  ['CCH','C-cell Hyperplasia (C세포 과형성) — 유전성 MTC의 전암 병변; >7개/군집, 전체 여포 둘러쌈, 비정상 분포'],
+  ['TNM','Tumor-Node-Metastasis — AJCC 갑상선암 병기 시스템; MTC에서 림프절 수(0/1–10/11–20/>20) 추가 수정 제안'],
+  ['ICMA','Immunochemiluminometric Assay — 면역화학발광측정법; 단량체 칼시토닌에 특이적; 프로칼시토닌 교차반응 최소'],
+  ['FNA','Fine-Needle Aspiration (세침흡인 세포검사) — ≥1 cm 갑상선 결절 평가. MTC 세포학 단독 민감도 <50%'],
+  ['TKI','Tyrosine Kinase Inhibitor (티로신 키나아제 억제제) — 진행성 MTC의 표준 전신치료; Vandetanib, Cabozantinib'],
+  ['Vandetanib','RET·EGFR·VEGFR 다중 TKI; 300 mg/일; FDA 2011 승인; PFS 중앙값 ~30개월; QTc 연장 주의(REMS)'],
+  ['Cabozantinib','RET·c-MET·VEGFR 다중 TKI; 140 mg/일; FDA 2012 승인; PFS 중앙값 11.2개월; 소화관 누공 주요 이상반응'],
+  ['PFS','Progression-Free Survival (무진행 생존기간) — TKI 임상시험의 일차 평가변수'],
+  ['EBRT','External Beam Radiation Therapy (외부 방사선 치료) — MTC에서 국소 재발 고위험군 수술 후 보조 치료; 생존율 개선 불명확'],
+  ['RAI','Radioactive Iodine (방사성 요오드) — MTC에서 적응증 없음(여포세포 종양 아님). 혼합 MTC+PTC/FTC 전이 시만 고려'],
+  ['CEA DT','CEA Doubling Time (CEA 배가 시간) — Calcitonin 배가 시간과 함께 MTC 진행 속도 지표; <6개월: 극히 불량한 예후'],
+  ['Calcitonin DT','Calcitonin Doubling Time (Calcitonin 배가 시간) — 독립적 생존 예측 인자; <6개월: 5년 생존율 25%, 10년 생존율 8%'],
+  ['RECIST','Response Evaluation Criteria in Solid Tumors — TKI 치료 반응 평가 기준; MTC에서 증상성·진행성 기준'],
+  ['PGD','Preimplantation Genetic Diagnosis (착상전 유전자 진단) — 체외수정 기술; RET 돌연변이 배아 선별; MEN2B 부모에게 특히 중요'],
+  ['VEGFR','Vascular Endothelial Growth Factor Receptor — MTC 종양 세포·혈관 내피에서 과발현; TKI 표적 중 하나'],
+  ['IHC','Immunohistochemistry (면역조직화학) — MTC에서 Calcitonin·chromogranin·CEA 양성, thyroglobulin 음성 패턴 확인'],
+  ['AJCC','American Joint Committee on Cancer — MTC TNM 병기 시스템 발행; 2017년 8판'],
+  ['ATA','American Thyroid Association — 본 가이드라인 발행 학회; 2015년 개정판(Thyroid 2015;25:567-610)'],
+  ['F-DOPA','18F-Dihydroxyphenylalanine PET/CT — 도파민 합성 경로 추적; MTC에서 1차 영상 비권고(R23)'],
+  ['FDG','18F-Fluorodeoxyglucose PET/CT — 당대사 기반 영상; MTC에서 원격 전이 검출 1차 영상 비권고(R23)'],
+  ['SEER','Surveillance, Epidemiology, and End Results — 미국 암 통계 데이터베이스; MTC 발생률 1–2% 근거'],
+];
+
+function buildAbbr() {
+  const items = abbrs.slice().sort((a,b)=>a[0].localeCompare(b[0]));
+  const html = items.map(a =>
+    `<div class="abbr-item" data-term="${a[0].toLowerCase()}" data-def="${a[1].toLowerCase()}">
+      <span class="abbr-term">${a[0]}</span>
+      <span class="abbr-def">${a[1]}</span>
+    </div>`).join('');
+  const mainGrid = document.getElementById('abbr-main-grid');
+  if (mainGrid) mainGrid.innerHTML = html;
+  document.getElementById('abbr-grid-drop').innerHTML = html;
+  document.getElementById('abbr-count').textContent = abbrs.length;
+}
+
+function positionDropdown() {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  const rect = inp.getBoundingClientRect();
+  const dropW = 480;
+  let left = rect.right - dropW;
+  if (left < 8) left = 8;
+  drop.style.top = (rect.bottom + 4) + 'px';
+  drop.style.left = left + 'px';
+}
+
+function filterAbbr(val) {
+  const v = val.toLowerCase().trim();
+  const drop = document.getElementById('abbr-dropdown');
+  const items = document.querySelectorAll('#abbr-grid-drop .abbr-item');
+  if (!v) { drop.style.display = 'none'; document.getElementById('abbr-count').textContent = abbrs.length; return; }
+  positionDropdown();
+  drop.style.display = 'block';
+  let visible = 0;
+  items.forEach(el => {
+    const show = el.dataset.term.startsWith(v) || el.dataset.def.includes(v);
+    el.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+  document.getElementById('abbr-count').textContent = visible + '/' + abbrs.length;
+}
+
+document.addEventListener('click', e => {
+  const inp = document.getElementById('abbr-input');
+  const drop = document.getElementById('abbr-dropdown');
+  if (inp && !inp.contains(e.target) && drop && !drop.contains(e.target)) drop.style.display = 'none';
+});
+
+buildAbbr();
+</script>
+</body>
+</html>
