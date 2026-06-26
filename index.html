@@ -22,13 +22,14 @@
     --rec-b: #0550ae;
     --rec-c: #57606a;
     --rec-e: #bc4c00;
+    --fscale: 1;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 13px;
+    font-size: calc(13px * var(--fscale, 1));
     line-height: 1.5;
     min-height: 100vh;
   }
@@ -49,15 +50,15 @@
   .logo-badge {
     background: #0f766e;
     color: #fff;
-    font-size: 10px;
+    font-size: calc(10px * var(--fscale, 1));
     font-weight: 700;
     padding: 3px 8px;
     border-radius: 4px;
     letter-spacing: 0.5px;
   }
   header h1 { font-size: 20px; font-weight: 700; color: var(--text); }
-  .meta { color: var(--text2); font-size: 11px; }
-  .source-link { color: var(--accent2); font-size: 11px; text-decoration: none; }
+  .meta { color: var(--text2); font-size: calc(11px * var(--fscale, 1)); }
+  .source-link { color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); text-decoration: none; }
   .source-link:hover { text-decoration: underline; }
 
   /* ── TABS ── */
@@ -71,10 +72,19 @@
     scrollbar-width: none;
   }
   .tab-bar::-webkit-scrollbar { display: none; }
+  .font-zoom-btn {
+    display: flex; align-items: center; gap: 3px; flex-shrink: 0;
+    margin: 4px 4px 4px 6px; padding: 5px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--accent2); font-size: calc(11px * var(--fscale, 1)); font-weight: 700;
+    cursor: pointer; user-select: none; white-space: nowrap; transition: background .15s;
+  }
+  .font-zoom-btn:hover { background: var(--border); }
+  .font-zoom-btn .fz-icon { font-size: calc(12px * var(--fscale, 1)); }
   .tab-bar-inner { width: 100%; max-width: 960px; display: flex; align-items: center; justify-content: center; gap: 2px; }
   .tab {
     padding: 8px 14px;
-    font-size: 12px;
+    font-size: calc(12px * var(--fscale, 1));
     color: var(--text2);
     cursor: pointer;
     border-bottom: 2px solid transparent;
@@ -108,7 +118,7 @@
   .card-header {
     background: var(--surface2);
     padding: 8px 12px;
-    font-size: 12px;
+    font-size: calc(12px * var(--fscale, 1));
     font-weight: 600;
     color: var(--text2);
     text-transform: uppercase;
@@ -121,7 +131,7 @@
     user-select: none;
   }
   .card-header .ch-title { display: flex; align-items: center; gap: 8px; }
-  .card-header .toggle { font-size: 14px; transition: transform .2s; }
+  .card-header .toggle { font-size: calc(14px * var(--fscale, 1)); transition: transform .2s; }
   .card-header.open .toggle { transform: rotate(180deg); }
   .card-body { padding: 10px 12px; }
   .card-body.collapsed { display: none; }
@@ -129,11 +139,11 @@
   /* ── STAT ── */
   .stat-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
   .stat-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; flex: 1; text-align: center; min-width: 100px; }
-  .stat-val { font-size: 20px; font-weight: 700; color: #0f766e; }
-  .stat-lbl { font-size: 10px; color: var(--text2); margin-top: 2px; }
+  .stat-val { font-size: calc(20px * var(--fscale, 1)); font-weight: 700; color: #0f766e; }
+  .stat-lbl { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); margin-top: 2px; }
 
   /* ── GRADE BADGES ── */
-  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
+  .grade { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: calc(10px * var(--fscale, 1)); font-weight: 700; white-space: nowrap; position: relative; cursor: help; }
   .grade-a { background: #dafbe1; color: #116329; border: 1px solid #1a7f37; }
   .grade-b { background: #ddf4ff; color: #0550ae; border: 1px solid #0550ae; }
   .grade-c { background: #f6f8fa; color: #57606a; border: 1px solid #57606a; }
@@ -151,7 +161,7 @@
     transform: translateX(-50%);
     background: #1f2328;
     color: #e6edf3;
-    font-size: 11px;
+    font-size: calc(11px * var(--fscale, 1));
     font-weight: 400;
     line-height: 1.5;
     padding: 6px 10px;
@@ -180,12 +190,12 @@
   .rec-item { padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; align-items: flex-start; }
   .rec-item:last-child { border-bottom: none; }
   .rec-badges { display: flex; gap: 4px; flex-shrink: 0; margin-top: 1px; flex-wrap: nowrap; }
-  .rec-num { font-size: 10px; color: var(--text2); font-weight: 700; min-width: 22px; margin-top: 2px; flex-shrink: 0; }
-  .rec-text { font-size: 12px; color: var(--text); line-height: 1.55; }
+  .rec-num { font-size: calc(10px * var(--fscale, 1)); color: var(--text2); font-weight: 700; min-width: 22px; margin-top: 2px; flex-shrink: 0; }
+  .rec-text { font-size: calc(12px * var(--fscale, 1)); color: var(--text); line-height: 1.55; }
   .rec-text strong { color: #0f766e; }
 
   /* ── ALERT ── */
-  .alert { padding: 8px 12px; border-radius: 6px; font-size: 12px; margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
+  .alert { padding: 8px 12px; border-radius: 6px; font-size: calc(12px * var(--fscale, 1)); margin: 8px 0; display: flex; gap: 8px; align-items: flex-start; }
   .alert-danger { background: #ffebe9; border-left: 3px solid var(--red); color: #82071e; }
   .alert-info { background: #ddf4ff; border-left: 3px solid var(--accent2); color: #0550ae; }
   .alert-warn { background: #fff8c5; border-left: 3px solid var(--yellow); color: #7d4e00; }
@@ -193,22 +203,22 @@
   .alert-teal { background: #f0fdfa; border-left: 3px solid #0f766e; color: #134e4a; }
 
   /* ── TABLE ── */
-  .mtc-table { width: 100%; border-collapse: collapse; font-size: 11px; }
-  .mtc-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; border-bottom: 1px solid var(--border); }
+  .mtc-table { width: 100%; border-collapse: collapse; font-size: calc(11px * var(--fscale, 1)); }
+  .mtc-table th { background: var(--surface2); color: var(--text2); padding: 6px 8px; font-size: calc(10px * var(--fscale, 1)); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; white-space: nowrap; text-align: left; border-bottom: 1px solid var(--border); }
   .mtc-table td { padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
   .mtc-table tr:last-child td { border-bottom: none; }
   .mtc-table tr:hover td { background: rgba(0,0,0,0.02); }
-  .mtc-table .section-row td { background: var(--surface2); color: #0f766e; font-weight: 600; font-size: 11px; }
+  .mtc-table .section-row td { background: var(--surface2); color: #0f766e; font-weight: 600; font-size: calc(11px * var(--fscale, 1)); }
 
   /* ── ACCORDION ── */
   .osa-acc { border: 1px solid var(--border); border-radius: 6px; margin-bottom: 5px; overflow: hidden; }
-  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: 12px; font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .osa-hdr { background: var(--surface2); padding: 7px 12px; font-size: calc(12px * var(--fscale, 1)); font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
   .osa-hdr:hover { background: var(--border); }
-  .osa-hdr span { font-size: 11px; color: var(--text2); }
-  .osa-body { display: none; padding: 10px 12px; font-size: 12px; }
+  .osa-hdr span { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); }
+  .osa-body { display: none; padding: 10px 12px; font-size: calc(12px * var(--fscale, 1)); }
 
   /* ── PILL ── */
-  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 10px; font-size: calc(10px * var(--fscale, 1)); font-weight: 600; white-space: nowrap; }
   .pill-hst { background: #ffebe9; color: #82071e; }
   .pill-h   { background: #fff8c5; color: #7d4e00; }
   .pill-mod { background: #dafbe1; color: #116329; }
@@ -217,21 +227,21 @@
   /* ── ABBR ── */
   .abbr-grid-main { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; }
   .abbr-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; display: flex; flex-direction: column; gap: 2px; }
-  .abbr-term { font-weight: 700; color: #0f766e; font-size: 12px; font-family: 'Courier New', monospace; white-space: nowrap; }
-  .abbr-def { font-size: 11px; color: var(--text2); line-height: 1.45; }
+  .abbr-term { font-weight: 700; color: #0f766e; font-size: calc(12px * var(--fscale, 1)); font-family: 'Courier New', monospace; white-space: nowrap; }
+  .abbr-def { font-size: calc(11px * var(--fscale, 1)); color: var(--text2); line-height: 1.45; }
 
   /* ── SCROLLBAR ── */
   ::-webkit-scrollbar { width: 5px; height: 5px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: #c8d0d9; border-radius: 3px; }
 
-  small { color: var(--text2); font-size: 10px; }
+  small { color: var(--text2); font-size: calc(10px * var(--fscale, 1)); }
   .sec-sep { height: 1px; background: var(--border); margin: 10px 0; }
 
   /* Risk badges */
-  .risk-hst { background: #ffebe9; color: #82071e; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
-  .risk-h   { background: #fff8c5; color: #7d4e00; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
-  .risk-mod { background: #dafbe1; color: #116329; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: 11px; }
+  .risk-hst { background: #ffebe9; color: #82071e; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: calc(11px * var(--fscale, 1)); }
+  .risk-h   { background: #fff8c5; color: #7d4e00; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: calc(11px * var(--fscale, 1)); }
+  .risk-mod { background: #dafbe1; color: #116329; font-weight: 700; text-align: center; padding: 4px 8px; border-radius: 4px; font-size: calc(11px * var(--fscale, 1)); }
 
   .flow-step {
     display: flex; align-items: flex-start; gap: 8px; padding: 8px 12px;
@@ -251,13 +261,14 @@
     <div style="text-align:center;margin-top:3px;line-height:1.4">
       <a href="https://doi.org/10.1089/thy.2014.0335" class="source-link" target="_blank">Thyroid 2015;25:567–610 ↗</a>
       <span class="meta"> · American Thyroid Association Guidelines Task Force on MTC</span><br>
-      <span style="font-size:10px;color:var(--text2);font-style:italic">This tool is not officially endorsed by ATA</span>
+      <span style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);font-style:italic">This tool is not officially endorsed by ATA</span>
     </div>
   </div>
 </header>
 
 <div class="tab-bar">
   <div class="tab-bar-inner">
+    <div id="font-zoom-btn" class="font-zoom-btn" onclick="cycleFontZoom()"><span class="fz-icon">🔠</span><span id="font-zoom-label">100%</span></div>
     <div class="tab active" onclick="showTab('overview',this)">🏠 개요</div>
     <div class="tab" onclick="showTab('genetics',this)">🧬 유전·분류</div>
     <div class="tab" onclick="showTab('diagnosis',this)">🔬 진단</div>
@@ -267,11 +278,11 @@
     <div class="tab" onclick="showTab('recs',this)">📋 권고 전체</div>
     <div class="tab-abbr-wrap">
       <div style="position:relative;display:flex;align-items:center;flex-shrink:0">
-        <span style="position:absolute;left:8px;color:var(--text2);font-size:12px;pointer-events:none">🔍</span>
+        <span style="position:absolute;left:8px;color:var(--text2);font-size: calc(12px * var(--fscale, 1));pointer-events:none">🔍</span>
         <input id="abbr-input" type="text" placeholder="약어 검색" oninput="filterAbbr(this.value)"
-          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size:12px;width:130px;outline:none;box-sizing:border-box;"
+          style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 8px 4px 26px;color:var(--text);font-size: calc(12px * var(--fscale, 1));width:130px;outline:none;box-sizing:border-box;"
           onfocus="this.style.borderColor='#0f766e'" onblur="this.style.borderColor='var(--border)'">
-        <span id="abbr-count" style="position:absolute;right:7px;font-size:10px;color:var(--text2);pointer-events:none"></span>
+        <span id="abbr-count" style="position:absolute;right:7px;font-size: calc(10px * var(--fscale, 1));color:var(--text2);pointer-events:none"></span>
       </div>
       <div id="abbr-dropdown" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;width:480px;max-height:360px;overflow-y:auto;z-index:300;box-shadow:0 8px 24px rgba(0,0,0,.12)">
         <div id="abbr-grid-drop" style="display:grid;grid-template-columns:1fr"></div>
@@ -373,7 +384,7 @@
           <td><strong>혈청 Calcitonin 상승 시</strong> (5세 시작)</td>
         </tr>
       </table>
-      <div style="margin-top:8px;font-size:11px;color:var(--text2)">* PHEO/HPTH 빈도: + ≈10%, ++ ≈20–30%, +++ ≈50%. CLA = 피부 지의 아밀로이드증 (C634 돌연변이와 관련). HD = 허쉬스프룽병 (exon 10 돌연변이와 관련)</div>
+      <div style="margin-top:8px;font-size: calc(11px * var(--fscale, 1));color:var(--text2)">* PHEO/HPTH 빈도: + ≈10%, ++ ≈20–30%, +++ ≈50%. CLA = 피부 지의 아밀로이드증 (C634 돌연변이와 관련). HD = 허쉬스프룽병 (exon 10 돌연변이와 관련)</div>
     </div>
   </div>
 
@@ -386,7 +397,7 @@
     <div class="card-body">
       <div class="grid2" style="gap:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">① 갑상선 결절 → MTC 의심·확진 시</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">① 갑상선 결절 → MTC 의심·확진 시</div>
           <div class="flow-step" style="background:#f0fdfa;border-left:3px solid #0f766e">
             <span class="flow-num" style="color:#0f766e">1</span>
             <div>경부 초음파 + 혈청 Calcitonin·CEA 측정 + RET 생식세포 돌연변이 검사</div>
@@ -409,7 +420,7 @@
           </div>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">② RET 생식세포 돌연변이 확인 시 (예방적 수술)</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">② RET 생식세포 돌연변이 확인 시 (예방적 수술)</div>
           <div class="flow-step" style="background:#ffebe9;border-left:3px solid var(--red)">
             <span class="flow-num" style="color:var(--red)">HST</span>
             <div>MEN2B (M918T): 생후 1년 이내 갑상선 절제술 ± level VI 림프절 청소술</div>
@@ -436,8 +447,8 @@
     <div class="card-body">
       <div class="grid2" style="gap:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">MEN2A (전체의 95%) — 4가지 변형</div>
-          <ul style="list-style:none;padding:0;font-size:12px;line-height:2">
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">MEN2A (전체의 95%) — 4가지 변형</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
             <li>• <strong>고전적 MEN2A</strong>: MTC + PHEO ± HPTH. RET exon 10/11 돌연변이(95%)</li>
             <li>• <strong>MEN2A + CLA</strong>: 등 피부 지의 아밀로이드증. RET C634 돌연변이</li>
             <li>• <strong>MEN2A + HD</strong>: 허쉬스프룽병. RET exon 10 돌연변이 (gain/loss 기능 공존)</li>
@@ -445,8 +456,8 @@
           </ul>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:6px">MEN2B (전체의 5%) — 가장 공격적</div>
-          <ul style="list-style:none;padding:0;font-size:12px;line-height:2">
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:6px">MEN2B (전체의 5%) — 가장 공격적</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:2">
             <li>• MTC + PHEO (~50%) + 특징적 표현형</li>
             <li>• Marfanoid 체형, 구강·안구·소화관 신경절신경종증</li>
             <li>• RET M918T (95%) 또는 A883F (5%)</li>
@@ -478,7 +489,7 @@
       </div>
       <div class="grid2" style="gap:8px;margin-top:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">유전성 MTC: 생식세포 돌연변이</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">유전성 MTC: 생식세포 돌연변이</div>
           <table class="mtc-table">
             <tr><th>증후군</th><th>RET 돌연변이</th><th>비율</th></tr>
             <tr><td>MEN2A (고전)</td><td>C634 (exon 11), C609/611/618/620 (exon 10)</td><td>~95%</td></tr>
@@ -487,7 +498,7 @@
           </table>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">산발성 MTC: 체세포 돌연변이</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">산발성 MTC: 체세포 돌연변이</div>
           <table class="mtc-table">
             <tr><th>변이</th><th>빈도</th><th>의의</th></tr>
             <tr><td>RET M918T</td><td>종양 크기↑와 상관</td><td>불량한 예후 예측</td></tr>
@@ -536,7 +547,7 @@
         <tr style="background:#fff0f0"><td><strong>M918T</strong></td><td>16</td><td><span class="risk-hst">HST</span></td><td><strong>+++</strong></td><td>-</td><td>N</td><td>N</td></tr>
       </table>
       </div>
-      <div style="font-size:10px;color:var(--text2);margin-top:6px">+ ≈10%, ++ ≈20–30%, +++ ≈50% | CLA: 피부 지의 아밀로이드증 | HD: 허쉬스프룽병 | Y=발생, N=미발생</div>
+      <div style="font-size: calc(10px * var(--fscale, 1));color:var(--text2);margin-top:6px">+ ≈10%, ++ ≈20–30%, +++ ≈50% | CLA: 피부 지의 아밀로이드증 | HD: 허쉬스프룽병 | Y=발생, N=미발생</div>
     </div>
   </div>
 
@@ -641,7 +652,7 @@
           </table>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Calcitonin 수치와 수술 범위 (Machens 2010)</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">Calcitonin 수치와 수술 범위 (Machens 2010)</div>
           <table class="mtc-table">
             <tr><th>수술 전 Calcitonin</th><th>예측 전이 부위</th></tr>
             <tr><td>&lt;20 pg/mL</td><td>림프절 전이 없음</td></tr>
@@ -701,8 +712,8 @@
     <div class="card-body">
       <div class="grid2" style="gap:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">MTC 조직학적 특징</div>
-          <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9">
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">MTC 조직학적 특징</div>
+          <ul style="list-style:none;padding:0;font-size: calc(12px * var(--fscale, 1));line-height:1.9">
             <li>• 원형, 다각형, 방추형 세포; 혈관 간질 내 소포/시트 구조</li>
             <li>• 아밀로이드 침착 (>50%에서): 전장 Calcitonin으로 구성</li>
             <li>• 면역조직화학: Calcitonin, CEA, chromogranin A 양성; thyroglobulin 음성</li>
@@ -817,7 +828,7 @@
       </div>
       <div class="grid2" style="gap:8px;margin-top:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">림프절 전이 패턴 (195명 연구)</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">림프절 전이 패턴 (195명 연구)</div>
           <table class="mtc-table">
             <tr><th>중앙 구획 (Level VI) 전이 수</th><th>동측 측경부 전이율</th><th>대측 측경부 전이율</th></tr>
             <tr><td>0개</td><td>10.1%</td><td>4.9%</td></tr>
@@ -826,7 +837,7 @@
           </table>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">측경부 청소술 합병증</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">측경부 청소술 합병증</div>
           <table class="mtc-table">
             <tr><th>합병증</th><th>빈도</th></tr>
             <tr><td>림프 누출</td><td>0.5–8%</td></tr>
@@ -925,7 +936,7 @@
       </div>
       <div class="grid2" style="gap:8px;margin-top:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;margin-bottom:6px">위험도별 수술 시기</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));margin-bottom:6px">위험도별 수술 시기</div>
           <table class="mtc-table">
             <tr><th>ATA 위험도</th><th>수술 시기</th><th>추적 시작</th></tr>
             <tr><td><span class="risk-hst">HST</span></td><td>생후 1년 이내 (수개월 내)</td><td>수술 후 6개월마다</td></tr>
@@ -978,7 +989,7 @@
     <div class="card-body">
       <div class="grid2" style="gap:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;color:var(--red);margin-bottom:6px">PHEO 관리 핵심 원칙</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--red);margin-bottom:6px">PHEO 관리 핵심 원칙</div>
           <div class="alert alert-danger">
             <span>⚠️</span>
             <div>진단 안 된 PHEO를 가진 채로 갑상선 수술 시 치명적 부정맥 및 사망 위험. <strong>갑상선 수술 전 반드시 PHEO 배제</strong> (혈장 유리 메타네프린 또는 24시간 소변 분획 메타네프린).</div>
@@ -1012,7 +1023,7 @@
           </ul>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:var(--yellow);margin-bottom:6px">HPTH 관리</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:var(--yellow);margin-bottom:6px">HPTH 관리</div>
           <div class="alert alert-info">
             <span>ℹ️</span>
             <div>MEN2A의 HPTH는 대개 경미·무증상. C634 돌연변이: ~30% 침투율. Exon 10 돌연변이: 2–12%.</div>
@@ -1065,7 +1076,7 @@
           </table>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Calcitonin·CEA 배가 시간 (Doubling Time)</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">Calcitonin·CEA 배가 시간 (Doubling Time)</div>
           <table class="mtc-table">
             <tr><th>배가 시간</th><th>5년 생존율</th><th>10년 생존율</th></tr>
             <tr><td>&lt;6개월</td><td>25%</td><td>8%</td></tr>
@@ -1198,7 +1209,7 @@
       </div>
       <div class="grid2" style="gap:8px;margin-top:8px">
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Vandetanib (표적: RET, EGFR, VEGFR)</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">Vandetanib (표적: RET, EGFR, VEGFR)</div>
           <table class="mtc-table">
             <tr><th>항목</th><th>내용</th></tr>
             <tr><td>용량</td><td>300 mg/일 (FDA 승인)</td></tr>
@@ -1214,7 +1225,7 @@
           </div>
         </div>
         <div>
-          <div style="font-weight:700;font-size:12px;color:#0f766e;margin-bottom:6px">Cabozantinib (표적: RET, c-MET, VEGFR)</div>
+          <div style="font-weight:700;font-size: calc(12px * var(--fscale, 1));color:#0f766e;margin-bottom:6px">Cabozantinib (표적: RET, c-MET, VEGFR)</div>
           <table class="mtc-table">
             <tr><th>항목</th><th>내용</th></tr>
             <tr><td>용량</td><td>140 mg/일 (FDA 승인)</td></tr>
@@ -1467,6 +1478,20 @@
 </div><!-- /main -->
 
 <script>
+const FONT_ZOOM_LEVELS = [1, 1.25, 1.5];
+let fontZoomIndex = 0;
+
+function applyFontZoom(scale) {
+  document.documentElement.style.setProperty('--fscale', scale);
+  const label = document.getElementById('font-zoom-label');
+  if (label) label.textContent = Math.round(scale * 100) + '%';
+}
+
+function cycleFontZoom() {
+  fontZoomIndex = (fontZoomIndex + 1) % FONT_ZOOM_LEVELS.length;
+  applyFontZoom(FONT_ZOOM_LEVELS[fontZoomIndex]);
+}
+
 // ─── TABS ───
 function showTab(id, el) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
